@@ -11,7 +11,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Borrower(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_borrower = models.BooleanField(default=False)
-    telephone_number = PhoneNumberField(blank=True)
+    telephone_number = PhoneNumberField(blank=True, unique=True)
 
     def __str__(self):
         return str(self.telephone_number)
