@@ -34,3 +34,6 @@ def save_user_borrower(sender, instance, **kwargs):
     if str(instance.borrower.telephone_number) == '+NoneNone':
         instance.borrower.telephone_number = ''
     instance.borrower.save()
+
+class Business(models.Model):
+    pass

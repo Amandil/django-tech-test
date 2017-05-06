@@ -1,6 +1,15 @@
+## Development
+
+### Assumptions / Shortcuts
+* The only unique aspect about a business will be its registered company number
+* A business only has one owner
+* An owner can have several businesses
+
+
+
 ## Overview
 
-Growth Street is building a platform to allow growing businesses to borrow money at affordable rates. Our ability to make the entire process efficient on our web platform will be critical in offering the lowest rates to our customers. 
+Growth Street is building a platform to allow growing businesses to borrow money at affordable rates. Our ability to make the entire process efficient on our web platform will be critical in offering the lowest rates to our customers.
 
 #### The Task
 

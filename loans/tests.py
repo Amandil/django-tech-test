@@ -10,7 +10,7 @@ class BorrowerTestCase(TestCase):
     '''
     New 'phone number' field should be valid and optional
     '''
-    def test_create(self):
+    def test_model_create(self):
 
         john = User.objects.create(first_name="John", last_name="Doe")
 
@@ -26,7 +26,7 @@ class BorrowerTestCase(TestCase):
     '''
     Only valid phone numbers should be accepted
     '''
-    def test_valid_telephone(self):
+    def test_telephone_format(self):
 
         # No extension | Uses PHONENUMBER_DEFAULT_REGION in settings.py
         john = User.objects.create(first_name="John", last_name="Doe")
@@ -49,7 +49,7 @@ class BorrowerTestCase(TestCase):
     '''
     Phone number must be unique
     '''
-    def test_duplicate(self):
+    def test_telephone_duplicate(self):
         john = User.objects.create(username="johndoe", first_name="John", last_name="Doe")
         john.borrower.is_borrower = True
         john.borrower.telephone_number = '+44 7762 25 4775'
@@ -74,18 +74,42 @@ class BusinessTestCase(TestCase):
         self.john.borrower.telephone_number = '+44 7762 25 4775'
         self.john.save()
 
-        self.jane = User.objects.create(username="janedoe", first_name="Jane", last_name="Doe")
-        self.jane.borrower.is_borrower = True
-        self.jane.borrower.telephone_number = '+40 745 497 778'
-        self.jane.save()
+        # self.jane = User.objects.create(username="janedoe", first_name="Jane", last_name="Doe")
+        # self.jane.borrower.is_borrower = True
+        # self.jane.borrower.telephone_number = '+40 745 497 778'
+        # self.jane.save()
 
-    def test_create(self):
+    '''
+    We must be able to create a business
+    '''
+    def test_model_create(self):
+        acme = Business.objects.create(
+            rcn = 09264172,
+            owner = self.john.pk,
+            name = "ACME Inc.",
+            sector = 'Professional Services',
+            address_one = '',
+            address_two = '',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+
+    '''
+    Two businesses cannot have the same company number
+    '''
+    def test_company_number_duplicate(self):
         pass
 
-    def test_company_number(self):
+    '''
+    The company number must be added in a valid format
+    '''
+    def test_company_number_format(self):
         pass
 
-    def test_address(self):
+    '''
+    The address must be added in a valid format
+    '''
+    def test_address_format(self):
         pass
 
     # def test
