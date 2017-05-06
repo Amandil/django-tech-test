@@ -3,8 +3,6 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Borrower
-from phonenumber_field.modelfields import PhoneNumberField
 
 class BorrowerTestCase(TestCase):
 
@@ -22,12 +20,28 @@ class BorrowerTestCase(TestCase):
         self.assertEqual(str(john.borrower.telephone_number), '')
 
         # If we do set phone number, it should not be an empty string
-        john.borrower.telephone_number = '+41 52 424 2424'
-        self.assertEqual(str(john.borrower.telephone_number), '+41524242424')
+        john.borrower.telephone_number = '+44 7762 25 4775'
+        self.assertEqual(str(john.borrower.telephone_number), '+447762254775')
+
+        john.save()
 
 
+    '''
+    Only valid phone numbers should be accepted
+    '''
     def test_valid_telephone(self):
-        pass
+
+        # No extension | Uses PHONENUMBER_DEFAULT_REGION in settings.py
+        john = User.objects.create(first_name="John", last_name="Doe")
+        john.borrower.telephone_number = '7762 25 4775'
+
+        self.assertEqual(str(john.borrower.telephone_number), '+447762254775')
+
+        # Invalid number
+        john.borrower.telephone_number = '+00 7762 25 4775 7762 25 4775'
+        john.save()
+
+        self.assertEqual(str(john.borrower.telephone_number), '')
 
 class BusinessTestCase(TestCase):
 
