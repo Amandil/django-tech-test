@@ -12,6 +12,9 @@ class Borrower(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     telephone_number = PhoneNumberField(blank=True)
 
+    def __str__(self):
+        return "Borrower " + str(self.telephone_number)
+
 '''
 Signals used to extend the user model as a one-to-one link
 '''

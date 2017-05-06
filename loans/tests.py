@@ -25,7 +25,6 @@ class BorrowerTestCase(TestCase):
 
         john.save()
 
-
     '''
     Only valid phone numbers should be accepted
     '''
