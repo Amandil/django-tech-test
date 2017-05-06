@@ -3,4 +3,17 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-# Create your tests here.
+class BorrowerTestCase(TestCase):
+
+    def setUp(self):
+        pass
+
+class BusinessTestCase(TestCase):
+
+    def setUp(self):
+        pass
+
+class LoanTestCase(TestCase):
+
+    def setUp(self):
+        pass
