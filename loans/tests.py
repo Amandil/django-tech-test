@@ -5,6 +5,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 
+from .models import Business
+
 class BorrowerTestCase(TestCase):
 
     '''
@@ -84,8 +86,8 @@ class BusinessTestCase(TestCase):
     '''
     def test_model_create(self):
         acme = Business.objects.create(
-            rcn = 09264172,
-            owner = self.john.pk,
+            crn = '09264172',
+            owner = self.john,
             name = "ACME Inc.",
             sector = 'Professional Services',
             address_one = '',
@@ -98,13 +100,59 @@ class BusinessTestCase(TestCase):
     Two businesses cannot have the same company number
     '''
     def test_company_number_duplicate(self):
-        pass
+        acme = Business.objects.create(
+            crn = '09264172',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'Professional Services',
+            address_one = '',
+            address_two = '',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+        acme.save()
+
+        with self.assertRaises(IntegrityError):
+            duplicate = Business.objects.create(
+                crn = '09264172',
+                owner = self.john,
+                name = "ACME Duplicate Inc.",
+                sector = 'Professional Services',
+                address_one = '',
+                address_two = '',
+                city = 'Manchester',
+                postcode = 'M14 5SZ',
+            )
+
 
     '''
     The company number must be added in a valid format
     '''
     def test_company_number_format(self):
-        pass
+
+        # 8 Digit number should be accepted
+        acme = Business.objects.create(
+            crn = '09264172',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'Professional Services',
+            address_one = '',
+            address_two = '',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+
+        # > 8 digits should not be accepted
+        acme = Business.objects.create(
+            crn = '09264172123123',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'Professional Services',
+            address_one = '',
+            address_two = '',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
 
     '''
     The address must be added in a valid format
