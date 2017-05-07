@@ -3,13 +3,13 @@
 
 ### Assumptions made on given requirements
 * The only unique aspect about a business will be its CRN
-* Only English CRNs are supported (numbers)
+* All 8 character CRNs are supported (Welsh + Scottish)
 
 ### Design choices
 * A business only has one owner
 * An owner can have several businesses
 * International phone numbers are accepted although default field format is 'GB'
-* Created custom CRN field, extending IntegerField (for convenience, would ideally make it support Welsh + Scottish CRNs)
+
 
 ## Overview
 

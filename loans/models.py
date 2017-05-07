@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MaxValueValidator
-
+from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 class Borrower(models.Model):
@@ -36,17 +36,8 @@ def save_user_borrower(sender, instance, **kwargs):
         instance.borrower.telephone_number = ''
     instance.borrower.save()
 
-class CRNField(models.IntegerField):
-    def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
-        self.min_value, self.max_value = min_value, max_value
-        models.IntegerField.__init__(self, verbose_name, name, **kwargs)
-    def formfield(self, **kwargs):
-        defaults = {'min_value': self.min_value, 'max_value':self.max_value}
-        defaults.update(kwargs)
-        return super(CRNField, self).formfield(**defaults)
-
 class Business(models.Model):
-    crn = CRNField(primary_key=True, min_value=0, max_value=99999999, unique=True)
+    crn = models.CharField(primary_key=True, max_length=8, unique=True, validators=[MinLengthValidator(8)])
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     SECTOR_CHOICES = (

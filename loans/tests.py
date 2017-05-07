@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
+from django.core.exceptions import ValidationError
 
 from .models import Business
 
@@ -89,12 +90,13 @@ class BusinessTestCase(TestCase):
             crn = '09264172',
             owner = self.john,
             name = "ACME Inc.",
-            sector = 'Professional Services',
-            address_one = '',
-            address_two = '',
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
             city = 'London',
             postcode = 'W8 5EH',
         )
+        acme.full_clean()
 
     '''
     Two businesses cannot have the same company number
@@ -104,22 +106,22 @@ class BusinessTestCase(TestCase):
             crn = '09264172',
             owner = self.john,
             name = "ACME Inc.",
-            sector = 'Professional Services',
-            address_one = '',
-            address_two = '',
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
             city = 'London',
             postcode = 'W8 5EH',
         )
-        acme.save()
+        acme.full_clean()
 
         with self.assertRaises(IntegrityError):
             duplicate = Business.objects.create(
                 crn = '09264172',
                 owner = self.john,
                 name = "ACME Duplicate Inc.",
-                sector = 'Professional Services',
-                address_one = '',
-                address_two = '',
+                sector = 'PS',
+                address_one = 'Building and Number',
+                address_two = 'Street',
                 city = 'Manchester',
                 postcode = 'M14 5SZ',
             )
@@ -130,29 +132,49 @@ class BusinessTestCase(TestCase):
     '''
     def test_company_number_format(self):
 
-        # 8 Digit number should be accepted
+        # 8 character number should be accepted
         acme = Business.objects.create(
             crn = '09264172',
             owner = self.john,
             name = "ACME Inc.",
-            sector = 'Professional Services',
-            address_one = '',
-            address_two = '',
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
             city = 'London',
             postcode = 'W8 5EH',
         )
 
-        # > 8 digits should not be accepted
+        acme.full_clean()
+
+        # > 8 characters should not be accepted
         acme = Business.objects.create(
             crn = '09264172123123',
             owner = self.john,
             name = "ACME Inc.",
-            sector = 'Professional Services',
-            address_one = '',
-            address_two = '',
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
             city = 'London',
             postcode = 'W8 5EH',
         )
+
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
+
+        # < 8 characters should not be accepted
+        acme = Business.objects.create(
+            crn = '0926',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
 
     '''
     The address must be added in a valid format
@@ -160,7 +182,6 @@ class BusinessTestCase(TestCase):
     def test_address_format(self):
         pass
 
-    # def test
 
 class LoanTestCase(TestCase):
 
