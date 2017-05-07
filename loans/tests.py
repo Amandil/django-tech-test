@@ -127,7 +127,6 @@ class BusinessTestCase(TestCase):
                 postcode = 'M14 5SZ',
             )
 
-
     '''
     The company number must be added in a valid format
     '''
@@ -181,8 +180,73 @@ class BusinessTestCase(TestCase):
     The address must be added in a valid format
     '''
     def test_address_format(self):
-        pass
 
+        # First address field must have some characters
+        acme = Business.objects.create(
+            crn = '09260926',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = '',
+            address_two = 'Street',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
+
+        # Second address field can be empty
+        acme = Business.objects.create(
+            crn = '09260927',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = '',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+        acme.full_clean()
+
+        # Postcode must be valid
+        acme = Business.objects.create(
+            crn = '09260928',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = '',
+            city = 'London',
+            postcode = 'INVALID POSTCODE',
+        )
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
+
+        acme = Business.objects.create(
+            crn = '09260929',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = '',
+            city = 'London',
+            postcode = '1W 2NP',
+        )
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
+
+        acme = Business.objects.create(
+            crn = '09260930',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = '',
+            city = 'London',
+            postcode = 'M145S',
+        )
+        with self.assertRaises(ValidationError):
+            acme.full_clean()
 
 class LoanTestCase(TestCase):
 

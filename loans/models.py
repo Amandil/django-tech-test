@@ -52,8 +52,9 @@ class Business(models.Model):
     )
     sector = models.CharField(max_length=2, choices=SECTOR_CHOICES)
     address_one = models.CharField(max_length=255)
-    address_two = models.CharField(max_length=255)
+    address_two = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255)
+    # Regex from http://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
     postcode = models.CharField(max_length=10)
 
     def __str__(self):

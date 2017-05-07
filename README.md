@@ -3,17 +3,18 @@
 
 ### Assumptions made on given requirements
 * The only unique aspect about a business will be its CRN
-* All 8 character CRNs are supported (English + Welsh + Scottish)
-* Have not added a minimum length validation on Loan reason. Assumption is that loan will not be given without a proper reason.
+* Have not added a minimum length validation on Loan reason. Assumption is that loan request will not be accepted without a proper reason.
 * No minimum loan duration specified. Assumed one month.
 * No maximum loan duration specified. Assumed 2 years.
 
 ### Design choices
+* All 8 character CRNs are supported (English + Welsh + Scottish)
 * A business only has one owner
 * An owner can have several businesses
 * International phone numbers are accepted although default field format is 'GB'
 * Used money field to store loan amount with default currency set to GBP. No functional reason here, just seemed like a cleaner solution.
 * Money field is validated against decimals due to a bug in 'moneyd' package. Default currency is GBP so it still validates correctly.
+* Postcode is UK-only and validated using regex. Could validate against a postcode database but its not ideal for businesses set up in newly-erected buildings (might result in loss of customers if a valid postcode is not accepted).
 
 ## Overview
 
