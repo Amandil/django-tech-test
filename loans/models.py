@@ -65,3 +65,7 @@ class Loan(models.Model):
     amount = MoneyField(max_digits=6, decimal_places=0, default_currency='GBP')
     loan_deadline = models.DateField(default=date.today, blank=False)
     reason = models.TextField()
+
+    def __str__(self):
+        time_left = self.loan_deadline - date.today()
+        return str(self.target_business) + " - " + str(self.amount) + " - " + str(time_left.days) + " days left"
