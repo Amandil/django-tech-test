@@ -216,3 +216,28 @@ class LoanTestCase(TestCase):
             loan_deadline = '2029-02-02',
             reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
         )
+
+    '''
+    Loan must be between 10000 and 100000
+    '''
+    def test_loan_amount(self):
+
+        # Too small, should not be valid
+        with self.assertRaises(ValidationError):
+            loan = Loan.objects.create(
+                target_business = self.acme,
+                amount = Money(5000, GBP),
+                loan_deadline = '2029-02-02',
+                reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
+            )
+            loan.full_clean()
+
+        # Too large, should not be valid
+        with self.assertRaises(ValidationError):
+            loan = Loan.objects.create(
+                target_business = self.acme,
+                amount = Money(500000, GBP),
+                loan_deadline = '2029-02-02',
+                reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
+            )
+            loan.full_clean()

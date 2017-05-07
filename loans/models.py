@@ -5,10 +5,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.validators import MinValueValidator
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
-from djmoney.models.fields import MoneyField
+from moneyed import Money, GBP
+from djmoney.models.fields import MoneyField,MoneyPatched
 from datetime import date
 
 class Borrower(models.Model):
@@ -62,7 +64,15 @@ class Business(models.Model):
 
 class Loan(models.Model):
     target_business = models.ForeignKey(Business, on_delete=models.CASCADE)
-    amount = MoneyField(max_digits=6, decimal_places=0, default_currency='GBP')
+    amount = MoneyField(
+        max_digits=6,
+        decimal_places=0,
+        default_currency='GBP',
+        validators=[
+            MinValueValidator(10000.0),
+            MaxValueValidator(100000.0)
+        ]
+    )
     loan_deadline = models.DateField(default=date.today, blank=False)
     reason = models.TextField()
 
