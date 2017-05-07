@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
+from djmoney.models.fields import MoneyField
+from datetime import date
 
 class Borrower(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -54,3 +56,12 @@ class Business(models.Model):
 
     def __str__(self):
         return "(" + str(self.crn) + ") " + self.name
+
+    class Meta:
+        verbose_name_plural = "Businesses"
+
+class Loan(models.Model):
+    target_business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    amount = MoneyField(max_digits=6, decimal_places=0, default_currency='GBP')
+    loan_deadline = models.DateField(default=date.today, blank=False)
+    reason = models.TextField()

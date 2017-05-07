@@ -3,7 +3,7 @@
 
 ### Assumptions made on given requirements
 * The only unique aspect about a business will be its CRN
-* All 8 character CRNs are supported (Welsh + Scottish)
+* All 8 character CRNs are supported (English + Welsh + Scottish)
 
 ### Design choices
 * A business only has one owner

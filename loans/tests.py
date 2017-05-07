@@ -5,8 +5,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from django.core.exceptions import ValidationError
-
-from .models import Business
+from moneyed import Money, GBP
+from .models import Business, Loan
 
 class BorrowerTestCase(TestCase):
 
@@ -186,4 +186,33 @@ class BusinessTestCase(TestCase):
 class LoanTestCase(TestCase):
 
     def setUp(self):
-        pass
+
+        # We need a business owner
+        self.john = User.objects.create(username="johndoe", first_name="John", last_name="Doe")
+        self.john.borrower.is_borrower = True
+        self.john.borrower.telephone_number = '+44 7762 25 4775'
+        self.john.save()
+
+        # Then we need a business
+        self.acme = Business.objects.create(
+            crn = '09264172',
+            owner = self.john,
+            name = "ACME Inc.",
+            sector = 'PS',
+            address_one = 'Building and Number',
+            address_two = 'Street',
+            city = 'London',
+            postcode = 'W8 5EH',
+        )
+        self.acme.full_clean()
+
+    '''
+    We must be able to create a loan
+    '''
+    def test_create(self):
+        Loan.objects.create(
+            target_business = self.acme,
+            amount = Money(20000, GBP),
+            loan_deadline = '2029-02-02',
+            reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
+        )
