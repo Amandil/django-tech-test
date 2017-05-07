@@ -16,6 +16,9 @@
 * Money field is validated against decimals due to a bug in 'moneyd' package. Default currency is GBP so it still validates correctly.
 * Postcode is UK-only and validated using regex. Could validate against a postcode database but its not ideal for businesses set up in newly-erected buildings (might result in loss of customers if a valid postcode is not accepted).
 
+### Not done
+* Tests are not data-driven and have hard-coded values. 
+
 ## Overview
 
 Growth Street is building a platform to allow growing businesses to borrow money at affordable rates. Our ability to make the entire process efficient on our web platform will be critical in offering the lowest rates to our customers.

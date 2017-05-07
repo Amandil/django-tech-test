@@ -230,7 +230,7 @@ class BusinessTestCase(TestCase):
             address_one = 'Building and Number',
             address_two = '',
             city = 'London',
-            postcode = '1W 2NP',
+            postcode = ' 2NP',
         )
         with self.assertRaises(ValidationError):
             acme.full_clean()

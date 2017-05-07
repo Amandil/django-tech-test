@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django.core.validators import MinValueValidator
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinLengthValidator
+from django.core.validators import RegexValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from moneyed import Money, GBP
 from djmoney.models.fields import MoneyField,MoneyPatched
@@ -54,8 +55,16 @@ class Business(models.Model):
     address_one = models.CharField(max_length=255)
     address_two = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255)
-    # Regex from http://stackoverflow.com/questions/164979/uk-postcode-regex-comprehensive
-    postcode = models.CharField(max_length=10)
+    # Regex from http://regexlib.com/REDetails.aspx?regexp_id=260&AspxAutoDetectCookieSupport=1
+    postcode = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                '^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$',
+                message='Postcode must be valid'
+            )
+        ]
+    )
 
     def __str__(self):
         return "(" + str(self.crn) + ") " + self.name
