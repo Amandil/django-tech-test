@@ -51,3 +51,6 @@ class Business(models.Model):
     address_two = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     postcode = models.CharField(max_length=10)
+
+    def __str__(self):
+        return "(" + str(self.crn) + ") " + self.name

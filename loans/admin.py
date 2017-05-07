@@ -6,6 +6,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from .models import Borrower
+from .models import Business
 
 # admin.site.register(Borrower)
 
@@ -26,3 +27,4 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Business)
