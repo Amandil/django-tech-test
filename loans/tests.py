@@ -7,6 +7,7 @@ from django.db.utils import IntegrityError
 from django.core.exceptions import ValidationError
 from moneyed import Money, GBP
 from .models import Business, Loan
+from datetime import date
 
 class BorrowerTestCase(TestCase):
 
@@ -213,7 +214,7 @@ class LoanTestCase(TestCase):
         Loan.objects.create(
             target_business = self.acme,
             amount = Money(20000, GBP),
-            loan_deadline = '2029-02-02',
+            loan_deadline = '2018-02-02',
             reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
         )
 
@@ -227,7 +228,7 @@ class LoanTestCase(TestCase):
             loan = Loan.objects.create(
                 target_business = self.acme,
                 amount = Money(5000, GBP),
-                loan_deadline = '2029-02-02',
+                loan_deadline = '2018-02-02',
                 reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
             )
             loan.full_clean()
@@ -237,6 +238,31 @@ class LoanTestCase(TestCase):
             loan = Loan.objects.create(
                 target_business = self.acme,
                 amount = Money(500000, GBP),
+                loan_deadline = '2018-02-02',
+                reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
+            )
+            loan.full_clean()
+
+    '''
+    Loan duration should be between one month and two years (See README.md for assumptions made)
+    '''
+    def test_loan_duration(self):
+
+        # Too short ammount of time, should not be valid
+        with self.assertRaises(ValidationError):
+            loan = Loan.objects.create(
+                target_business = self.acme,
+                amount = Money(50000, GBP),
+                loan_deadline = date.today(),
+                reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
+            )
+            loan.full_clean()
+
+        # Too long ammount of time, should not be valid
+        with self.assertRaises(ValidationError):
+            loan = Loan.objects.create(
+                target_business = self.acme,
+                amount = Money(50000, GBP),
                 loan_deadline = '2029-02-02',
                 reason = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta ligula ac mattis congue. Aenean ut felis sit amet quam auctor cursus. Nulla in ornare sem, non tristique nisi. Sed volutpat rhoncus diam id convallis. Phasellus nec enim at libero scelerisque tempus. In mauris nisl, dictum non varius in, ultrices et lorem.'
             )

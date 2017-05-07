@@ -5,6 +5,8 @@
 * The only unique aspect about a business will be its CRN
 * All 8 character CRNs are supported (English + Welsh + Scottish)
 * Have not added a minimum length validation on Loan reason. Assumption is that loan will not be given without a proper reason.
+* No minimum loan duration specified. Assumed one month.
+* No maximum loan duration specified. Assumed 2 years.
 
 ### Design choices
 * A business only has one owner

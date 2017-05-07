@@ -11,7 +11,7 @@ from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from moneyed import Money, GBP
 from djmoney.models.fields import MoneyField,MoneyPatched
-from datetime import date
+from datetime import date, timedelta
 
 class Borrower(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -73,7 +73,14 @@ class Loan(models.Model):
             MaxValueValidator(100000.0)
         ]
     )
-    loan_deadline = models.DateField(default=date.today, blank=False)
+    loan_deadline = models.DateField(
+        default=date.today,
+        blank=False,
+        validators=[
+            MinValueValidator(date.today() + timedelta(days=28)),
+            MaxValueValidator(date.today() + timedelta(days=730))
+        ]
+    )
     reason = models.TextField()
 
     def __str__(self):
