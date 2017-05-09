@@ -1,0 +1,33 @@
+
+$back-dark: #24292d;
+$back-light: #dadada;
+$accent-dark: #607276;
+$accent-light: #66c5c8;
+$foreground: #FFF;
+$nav-back: #14191d;
+
+html {
+  padding: 0px;
+}
+
+body {
+  background-color: $back-light;
+  color: $foreground;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  padding: 0px;
+}
+
+#nav {
+  background-color: $back-dark;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 15px 60px;
+
+  #nav-content {
+    max-width: 1000px;
+    margin: auto;
+  }
+}

@@ -5,6 +5,10 @@ apt update
 apt -y install python3 python3-pip
 pip3 install django selenium django-phonenumber-field py-moneyed django-money
 
+# Installing Sass
+apt -y install ruby
+gem install sass
+
 # PhantomJS set-up
 export PHANTOM_JS="phantomjs-1.9.8-linux-x86_64"
 wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2

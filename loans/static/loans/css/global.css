@@ -1,0 +1,22 @@
+html {
+  padding: 0px; }
+
+body {
+  background-color: #dadada;
+  color: #FFF;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  padding: 0px; }
+
+#nav {
+  background-color: #24292d;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding: 15px 60px; }
+  #nav #nav-content {
+    max-width: 1000px;
+    margin: auto; }
+
+/*# sourceMappingURL=global.css.map */
