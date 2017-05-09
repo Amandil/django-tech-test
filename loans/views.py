@@ -7,7 +7,7 @@ from django.http import HttpResponse
 
 def index(request):
 
-    return redirect('/dashboard')
+    # return redirect('/dashboard')
 
     context = {
         'title': 'Sign In'

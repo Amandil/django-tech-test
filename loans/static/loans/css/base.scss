@@ -37,11 +37,15 @@ body {
     max-width: 1000px;
     margin: auto;
 
-    .panel-body h1 {
-      font-size: 22pt;
-      font-weight: 600;
-      text-align: center;
-      color: $foreground-dark;
+    .panel-body {
+      padding: 40px;
+
+      h1 {
+        font-size: 22pt;
+        font-weight: 600;
+        // text-align: center;
+        color: $foreground-dark;
+      }
     }
   }
 }

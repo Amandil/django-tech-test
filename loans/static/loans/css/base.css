@@ -21,11 +21,12 @@ body {
   #content-area #content {
     max-width: 1000px;
     margin: auto; }
-    #content-area #content .panel-body h1 {
-      font-size: 22pt;
-      font-weight: 600;
-      text-align: center;
-      color: #283034; }
+    #content-area #content .panel-body {
+      padding: 40px; }
+      #content-area #content .panel-body h1 {
+        font-size: 22pt;
+        font-weight: 600;
+        color: #283034; }
 
 a {
   color: #46a5a8; }
