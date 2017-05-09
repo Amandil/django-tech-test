@@ -3,7 +3,6 @@ html {
 
 body {
   background-color: #dadada;
-  color: #FFF;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   padding: 0px; }
 
@@ -11,12 +10,24 @@ body {
   background-color: #24292d;
   height: 60px;
   width: 100%;
-  position: fixed;
   top: 0px;
   left: 0px;
   padding: 15px 60px; }
   #nav #nav-content {
     max-width: 1000px;
     margin: auto; }
+
+#content-area {
+  margin-top: 40px;
+  width: 100%;
+  position: absolute; }
+  #content-area #content {
+    max-width: 1000px;
+    margin: auto; }
+    #content-area #content .panel-body h1 {
+      font-size: 22pt;
+      font-weight: 600;
+      text-align: center;
+      color: #283034; }
 
 /*# sourceMappingURL=global.css.map */

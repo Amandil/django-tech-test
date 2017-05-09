@@ -5,5 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    # return render(request, 'loans/index.html', context)
-    return render(request, 'loans/index.html')
+    context = {
+        'title': 'Homepage'
+    }
+    return render(request, 'loans/base_index.html', context)
