@@ -1,8 +1,9 @@
 
 $back-dark: #24292d;
 $back-light: #dadada;
-$accent-dark: #607276;
-$accent-light: #66c5c8;
+$accent: #66c5c8;
+$accent-dark: #46a5a8;
+$accent-secondary: #607276;
 $foreground-light: #FFF;
 $nav-back: #14191d;
 $foreground-dark: #283034;
@@ -11,40 +12,20 @@ html {
   padding: 0px;
 }
 
-body {
-  background-color: $back-light;
-  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-  padding: 0px;
+.btn {
+  border-radius: 45px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-#nav {
-  background-color: $back-dark;
-  height: 60px;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  padding: 15px 60px;
-
-  #nav-content {
-    max-width: 1000px;
-    margin: auto;
-  }
+.btn-primary {
+  background-color: $accent;
+  color: $foreground-light;
+  border: 0px;
 }
 
-#content-area {
-  margin-top: 40px;
-  width: 100%;
-  position: absolute;
+.btn-primary:hover, .btn-primary:focus {
 
-  #content {
-    max-width: 1000px;
-    margin: auto;
-
-    .panel-body h1 {
-      font-size: 22pt;
-      font-weight: 600;
-      text-align: center;
-      color: $foreground-dark;
-    }
-  }
+    background-color: $accent-dark;
+    color: $foreground-light;
 }

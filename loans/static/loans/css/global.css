@@ -1,33 +1,18 @@
 html {
   padding: 0px; }
 
-body {
-  background-color: #dadada;
-  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-  padding: 0px; }
+.btn {
+  border-radius: 45px;
+  padding-left: 30px;
+  padding-right: 30px; }
 
-#nav {
-  background-color: #24292d;
-  height: 60px;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  padding: 15px 60px; }
-  #nav #nav-content {
-    max-width: 1000px;
-    margin: auto; }
+.btn-primary {
+  background-color: #66c5c8;
+  color: #FFF;
+  border: 0px; }
 
-#content-area {
-  margin-top: 40px;
-  width: 100%;
-  position: absolute; }
-  #content-area #content {
-    max-width: 1000px;
-    margin: auto; }
-    #content-area #content .panel-body h1 {
-      font-size: 22pt;
-      font-weight: 600;
-      text-align: center;
-      color: #283034; }
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #46a5a8;
+  color: #FFF; }
 
 /*# sourceMappingURL=global.css.map */

@@ -1,0 +1,25 @@
+body {
+  background: #24292d;
+  /* Old browsers */
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  padding: 0px;
+  color: #FFF; }
+
+a {
+  color: #66c5c8; }
+
+a:hover, a:visited {
+  color: #46a5a8; }
+
+#container {
+  position: absolute;
+  top: 40%;
+  bottom: 60%;
+  width: 100%; }
+  #container .row {
+    margin: auto;
+    max-width: 1000px; }
+    #container .row #logo-col {
+      border-right: 1px solid #FFF; }
+
+/*# sourceMappingURL=auth.css.map */
