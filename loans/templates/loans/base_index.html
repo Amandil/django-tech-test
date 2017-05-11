@@ -8,8 +8,25 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
+        <button class="btn btn-primary pull-right" style="margin-top: 18px">
+          <span class="glyphicon glyphicon-plus" style="margin-right: 5px; "></span>
+          Apply for a loan
+        </button>
         <h1> Your Loan Applications </h1>
+        <hr/>
 
+        <ul class="list-group">
+          {% if loans %}
+            {% for loan in loans %}
+              <a href="#" class="list-group-item" style="font-size: 16pt">
+                <strong>£{{loan.amount}}</strong> <small>for {{loan.business_name}} until {{loan.deadline}}</small>
+                <span class="badge" style="font-size: 10pt">{{loan.left}} days left</span>
+              </a>
+            {% endfor %}
+          {% else %}
+            <center><p style="font-size: 16pt; margin-top: 50px">You don't seem to have any loan applications</p></center>
+          {% endif %}
+        </ul>
 
       </div> <!-- panel-body -->
     </div> <!-- panel -->

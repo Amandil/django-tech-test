@@ -22,6 +22,7 @@ html {
   background-color: $accent;
   color: $foreground-light;
   border: 0px;
+  font-weight: bold !important;
 }
 
 .btn-primary:hover, .btn-primary:focus {

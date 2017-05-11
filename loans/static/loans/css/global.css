@@ -9,7 +9,8 @@ html {
 .btn-primary {
   background-color: #66c5c8;
   color: #FFF;
-  border: 0px; }
+  border: 0px;
+  font-weight: bold !important; }
 
 .btn-primary:hover, .btn-primary:focus {
   background-color: #46a5a8;

@@ -6,6 +6,7 @@
 * Have not added a minimum length validation on Loan reason. Assumption is that loan request will not be accepted without a proper reason.
 * No minimum loan duration specified. Assumed one month.
 * No maximum loan duration specified. Assumed 2 years.
+* We are not recording the date when a loan was requested
 
 ### Design choices
 * All 8 character CRNs are supported (English + Welsh + Scottish)
@@ -17,7 +18,7 @@
 * Postcode is UK-only and validated using regex. Could validate against a postcode database but its not ideal for businesses set up in newly-erected buildings (might result in loss of customers if a valid postcode is not accepted).
 
 ### Not done
-* Tests are not data-driven and have hard-coded values. 
+* Tests are not data-driven and have hard-coded values.
 
 ## Overview
 

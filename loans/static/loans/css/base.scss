@@ -12,6 +12,14 @@ body {
   background-color: $back-light;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   padding: 0px;
+
+  a {
+    color: $accent-dark;
+  }
+
+  a:hover, a:visited {
+    color: $accent-secondary;
+  }
 }
 
 #nav {
@@ -34,7 +42,7 @@ body {
   position: absolute;
 
   #content {
-    max-width: 1000px;
+    max-width: 800px;
     margin: auto;
 
     .panel-body {
@@ -48,13 +56,4 @@ body {
       }
     }
   }
-}
-
-
-a {
-  color: $accent-dark;
-}
-
-a:hover, a:visited {
-  color: $accent-secondary;
 }

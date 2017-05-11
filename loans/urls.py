@@ -7,4 +7,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^dashboard$', views.dashboard, name='dashboard'),
+    url(r'^register$', views.registration, name='registration'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

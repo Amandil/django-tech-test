@@ -14,8 +14,46 @@ def index(request):
     }
     return render(request, 'loans/auth.html', context)
 
+def registration(request):
+    context = {
+        'title': 'Register'
+    }
+    return render(request, 'loans/base_register.html', context)
+
 def dashboard(request):
     context = {
-        'title': 'Homepage'
+        'title': 'Homepage',
+        'loans': [
+            {
+                'business_name': 'ACME Inc.',
+                'amount': '12,000',
+                'deadline': '12 Dec 2022',
+                'left': '451 days'
+            },
+            {
+                'business_name': 'ACME Inc.',
+                'amount': '12,000',
+                'deadline': '12 Dec 2022',
+                'left': '451 days'
+            },
+            {
+                'business_name': 'ACME Inc.',
+                'amount': '12,000',
+                'deadline': '12 Dec 2022',
+                'left': '451 days'
+            },
+            {
+                'business_name': 'ACME Inc.',
+                'amount': '12,000',
+                'deadline': '12 Dec 2022',
+                'left': '451 days'
+            },
+            {
+                'business_name': 'ACME Inc.',
+                'amount': '12,000',
+                'deadline': '12 Dec 2022',
+                'left': '451 days'
+            },
+        ]
     }
     return render(request, 'loans/base_index.html', context)
