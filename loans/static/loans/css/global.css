@@ -6,9 +6,9 @@ html {
   padding-left: 30px;
   padding-right: 30px; }
 
-.btn-primary {
+.btn-primary, a.btn-primary:visited {
   background-color: #66c5c8;
-  color: #FFF;
+  color: #FFF !important;
   border: 0px;
   font-weight: bold !important; }
 

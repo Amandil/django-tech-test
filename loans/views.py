@@ -57,3 +57,29 @@ def dashboard(request):
         ]
     }
     return render(request, 'loans/base_index.html', context)
+
+def loan_application(request, step, crn=""):
+
+    if step == "1":
+        context = {
+            'title': 'Loan Application - Step 1'
+        }
+        return render(request, 'loans/base_apply_select_business.html', context)
+
+    elif step == "2":
+        context = {
+            'title': 'Loan Application - Add Business'
+        }
+        return render(request, 'loans/base_apply_add_business.html', context)
+
+    elif step == "3":
+        context = {
+            'title': 'Loan Application - Step 2'
+        }
+        return render(request, 'loans/base_apply_choose_loan.html', context)
+
+    elif step == "4":
+        context = {
+            'title': 'Loan Application - Success'
+        }
+        return render(request, 'loans/base_apply_success.html', context)

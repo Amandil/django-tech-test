@@ -18,9 +18,9 @@ html {
   padding-right: 30px;
 }
 
-.btn-primary {
+.btn-primary, a.btn-primary:visited {
   background-color: $accent;
-  color: $foreground-light;
+  color: $foreground-light !important;
   border: 0px;
   font-weight: bold !important;
 }
