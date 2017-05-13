@@ -24,36 +24,6 @@ def dashboard(request):
     context = {
         'title': 'Homepage',
         'loans': [
-            {
-                'business_name': 'ACME Inc.',
-                'amount': '12,000',
-                'deadline': '12 Dec 2022',
-                'left': '451 days'
-            },
-            {
-                'business_name': 'ACME Inc.',
-                'amount': '12,000',
-                'deadline': '12 Dec 2022',
-                'left': '451 days'
-            },
-            {
-                'business_name': 'ACME Inc.',
-                'amount': '12,000',
-                'deadline': '12 Dec 2022',
-                'left': '451 days'
-            },
-            {
-                'business_name': 'ACME Inc.',
-                'amount': '12,000',
-                'deadline': '12 Dec 2022',
-                'left': '451 days'
-            },
-            {
-                'business_name': 'ACME Inc.',
-                'amount': '12,000',
-                'deadline': '12 Dec 2022',
-                'left': '451 days'
-            },
         ]
     }
     return render(request, 'loans/base_index.html', context)
@@ -61,8 +31,15 @@ def dashboard(request):
 def loan_application(request, step, crn=""):
 
     if step == "1":
+
+        # Retrieving all of the curent user's businesses
+        
+
         context = {
-            'title': 'Loan Application - Step 1'
+            'title': 'Loan Application - Step 1',
+            'businesses': [
+
+            ]
         }
         return render(request, 'loans/base_apply_select_business.html', context)
 

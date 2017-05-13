@@ -8,17 +8,29 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <a class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' '2' %}">
+        <a id="add-business" class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' '2' %}">
           <span class="glyphicon glyphicon-plus" style="margin-right: 5px; "></span>
           Add a business
         </a>
         <h1> 1 - Select your business</h1>
         <hr/>
 
-        
+        <ul id="business-list" class="list-group">
+          {% if businesses %}
+            {% for business in businesses %}
+              <a href="#" class="list-group-item" style="font-size: 16pt">
+                <strong>£{{loan.amount}}</strong> <small>for {{loan.business_name}} until {{loan.deadline}}</small>
+                <span class="badge" style="font-size: 10pt">{{loan.left}} days left</span>
+              </a>
+            {% endfor %}
+          {% else %}
+            <center><p style="font-size: 16pt; margin-top: 50px">You don't seem to have any businesses</p></center>
+          {% endif %}
+        </ul>
 
-        <hr/>
-        <a href="{% url 'loan_application_crn' '3' '11131112' %}" class="btn btn-primary pull-right">Next ></a>
+
+        {# <hr/>#}
+        {# <a href="{% url 'loan_application_crn' '3' '11131112' %}" class="btn btn-primary pull-right">Next ></a>#}
 
       </div> <!-- panel-body -->
     </div> <!-- panel -->

@@ -18,7 +18,7 @@ $(document).ready(function() {
       }),
       statusCode: {
         302: function(data) {
-          document.location.href="/";
+          document.location.replace("/");
         },
         401: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

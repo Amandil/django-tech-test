@@ -8,14 +8,14 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <a class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' 1%}">
+        <a id="apply-loan" class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' 1%}">
           <span class="glyphicon glyphicon-plus" style="margin-right: 5px; "></span>
           Apply for a loan
         </a>
         <h1> Your Loan Applications </h1>
         <hr/>
 
-        <ul class="list-group">
+        <ul id="loan-list" class="list-group">
           {% if loans %}
             {% for loan in loans %}
               <a href="#" class="list-group-item" style="font-size: 16pt">

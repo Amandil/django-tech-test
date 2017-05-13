@@ -24,7 +24,7 @@ $(document).ready(function() {
       }),
       statusCode: {
         200: function(data) {
-          document.location.href="/";
+          document.location.replace("/");
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);
