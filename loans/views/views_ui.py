@@ -6,13 +6,13 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 
 def index(request):
-
-    # return redirect('/dashboard')
-
-    context = {
-        'title': 'Sign In'
-    }
-    return render(request, 'loans/auth.html', context)
+    if not request.user.is_authenticated:
+        context = {
+            'title': 'Sign In'
+        }
+        return render(request, 'loans/auth.html', context)
+    else:
+        return redirect('/dashboard')
 
 def registration(request):
     context = {

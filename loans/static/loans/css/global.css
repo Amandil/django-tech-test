@@ -16,4 +16,7 @@ html {
   background-color: #46a5a8;
   color: #FFF; }
 
+#error-message {
+  display: none; }
+
 /*# sourceMappingURL=global.css.map */

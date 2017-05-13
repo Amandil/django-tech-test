@@ -9,7 +9,7 @@ from django.db.utils import IntegrityError
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
-
+from django.contrib.auth import authenticate, login, logout
 import json
 
 def register(request):
@@ -40,8 +40,8 @@ def register(request):
                 first_name =  data['first_name'],
                 last_name =  data['last_name'],
                 email =  data['email'],
-                password =  data['password'],
             )
+            new_user.set_password(data['password'])
             new_user.borrower.telephone_number = data['telephone_number']
             new_user.borrower.is_borrower = True
 
@@ -69,4 +69,30 @@ def register(request):
         return JsonResponse({}, status=400)
 
 def log_in(request):
-    pass
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    try:
+        email = data['email']
+        # Looking up username based on email
+        username = next(iter(User.objects.filter(email=email)), None).username
+        password = data['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            return JsonResponse({'message': "Invalid username or password " + username}, status=401)
+
+
+    except KeyError as ke:
+        return JsonResponse({'message': str(ke) + " is required"}, status=400)
+
+def log_out(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'message': "You must be logged in to use this feature"}, status=403)
+
+    logout(request)
+
+    return redirect('index')

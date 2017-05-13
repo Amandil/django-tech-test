@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'^apply/loan-application/([1-4]{1})/', views.views_ui.loan_application, name='loan_application'),
     url(r'^apply/loan-application/([1-4]{1})/([a-z,A-Z,0-9]{8})$', views.views_ui.loan_application, name='loan_application_crn'),
     # "API"
-    url(r'^api/v1/register$', views.views_api.register)
+    url(r'^api/v1/register$', views.views_api.register),
+    url(r'^api/v1/log_in$', views.views_api.log_in),
+    url(r'^api/v1/log_out$', views.views_api.log_out)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

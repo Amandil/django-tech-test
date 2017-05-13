@@ -30,3 +30,7 @@ html {
     background-color: $accent-dark;
     color: $foreground-light;
 }
+
+#error-message {
+  display: none;
+}
