@@ -17,7 +17,7 @@ from datetime import date, timedelta
 class Borrower(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_borrower = models.BooleanField(default=False)
-    telephone_number = PhoneNumberField(blank=True, unique=True)
+    telephone_number = PhoneNumberField(blank=True)
 
     def __str__(self):
         return str(self.telephone_number)

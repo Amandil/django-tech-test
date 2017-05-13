@@ -16,10 +16,13 @@
 * Used money field to store loan amount with default currency set to GBP. No functional reason here, just seemed like a cleaner solution.
 * Money field is validated against decimals due to a bug in 'moneyd' package. Default currency is GBP so it still validates correctly.
 * Postcode is UK-only and validated using regex. Could validate against a postcode database but its not ideal for businesses set up in newly-erected buildings (might result in loss of customers if a valid postcode is not accepted).
+* Added an 'is_borrower' flag to users to separate those that registered for loans from those that might have registered for other applications
+* Email is more memorable than username, username will be automatically generated so that user will not be inconvenienced
 
 ### Not done
 * Tests are not data-driven and have hard-coded values.
-* Did not use Django REST framework, API is simple and not resource-oriented 
+* Did not use Django REST framework, API is simple and not resource-oriented
+
 
 ## Overview
 

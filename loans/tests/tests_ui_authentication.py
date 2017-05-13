@@ -5,6 +5,7 @@ from selenium import webdriver
 ENDPOINT = os.environ['LOANS_URL']
 TITLE_PREFIX = 'GrowthStreet Loans - '
 
+# unittest.TestCase is not a typo - Database must be kept intact
 class TestRegistration(unittest.TestCase):
 
     def setUp(self):

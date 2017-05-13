@@ -1,5 +1,6 @@
 import unittest, requests, os
 
+from django.test import TestCase
 from selenium import webdriver
 
 from django.contrib.auth.models import User
@@ -8,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 ENDPOINT = os.environ['LOANS_URL']
 API_ENDPOINT =  ENDPOINT + "/api/v1"
 
-class TestAPIRegistration(unittest.TestCase):
+class TestAPIRegistration(TestCase):
 
     '''
     Starting a new session with Selenium in order to grab a CSRF token
@@ -37,7 +38,7 @@ class TestAPIRegistration(unittest.TestCase):
             'last_name': 'Smith',
             'email': 'john.smith@acme.com',
             'password': 'correct-horse-battery-staple',
-            'phone_number': '+44 7765 222 4567'
+            'telephone_number': '+44 7765 222 4567'
         }
         response = requests.post(API_ENDPOINT + "/register", cookies=self.cookies, headers=self.headers, data=payload)
 
@@ -60,7 +61,7 @@ class TestAPIRegistration(unittest.TestCase):
             'last_name': 'Smith',
             'email': 'john.smith@acme.com',
             'password': 'correct-horse-battery-staple',
-            'phone_number': '+44 7765 222 4567'
+            'telephone_number': '+44 7765 222 4567'
         }
 
         response = requests.get(API_ENDPOINT + "/register", cookies=self.cookies, headers=self.headers, data=payload)
@@ -68,3 +69,15 @@ class TestAPIRegistration(unittest.TestCase):
 
         with self.assertRaises(ObjectDoesNotExist):
             new_user = User.objects.get(email='john.smith@acme.com')
+
+    '''
+    Users must be unique
+    '''
+    def test_integrity(self):
+        pass
+
+    '''
+    Data must be valid
+    '''
+    def test_validation(self):
+        pass
