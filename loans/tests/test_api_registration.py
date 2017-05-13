@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.test import Client
 
-import time
+import time, json
 
 ENDPOINT = os.environ["LOANS_URL"]
 API_ENDPOINT =  ENDPOINT + "/api/v1"
@@ -38,7 +38,7 @@ class TestAPIRegistration(TransactionTestCase):
         response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
 
         # Response must be OK
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(200, response.status_code, response.content)
 
         # User must have been created
         user = next(iter(User.objects.filter(email="john.smith@acme.com")), None)

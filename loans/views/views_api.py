@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import json
 
-from loans.models import Business
+from loans.models import Business, Borrower
 
 def register(request):
 
@@ -44,10 +44,14 @@ def register(request):
                 email =  data['email'],
             )
             new_user.set_password(data['password'])
+
+            # Validation and save
+            new_user.full_clean()
+            new_user.save()
+
             new_user.borrower.telephone_number = data['telephone_number']
             new_user.borrower.is_borrower = True
 
-            # Validation and save
             new_user.full_clean()
             new_user.save()
 

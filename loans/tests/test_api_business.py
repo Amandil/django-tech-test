@@ -49,7 +49,7 @@ class TestBusinessAPI(TransactionTestCase):
         payload = """{
             "crn": "09264172",
             "business_name": "ACME Inc.",
-            "sector": "PS",
+            "sector": "Retail",
             "address_1": "Building and Number",
             "address_2": "Street",
             "city": "London",
@@ -57,4 +57,4 @@ class TestBusinessAPI(TransactionTestCase):
         }"""
 
         response = self.client.post(API_ENDPOINT + "/business/add",content_type="application/json", data=payload)
-        self.assertEqual(200, response.status_code)
+        self.assertEqual(200, response.status_code, response.content)
