@@ -10,11 +10,13 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 
+import json
+
 def register(request):
 
     if request.method == 'POST':
 
-        data = request.POST
+        data = json.loads(request.body.decode('utf-8'))
 
         try:
 

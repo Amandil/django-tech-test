@@ -19,10 +19,10 @@
 * Added an 'is_borrower' flag to users to separate those that registered for loans from those that might have registered for other applications
 * Email is more memorable than username, username will be automatically generated so that user will not be inconvenienced
 
-### Not done
+### Not done (Due to time constraints)
 * Tests are not data-driven and have hard-coded values.
 * Did not use Django REST framework, API is simple and not resource-oriented
-* Does not check if email address is unique, reasonably assumed Django would handle it 
+* Does not check if email address is unique, reasonably assumed Django would handle it
 
 ## Overview
 

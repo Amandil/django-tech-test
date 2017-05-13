@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+
+<script src='{% static "loans/controllers/register.js" %}'></script>
 
 <div class="row">
 
@@ -11,7 +14,11 @@
         <h1> Create an account </h1>
         <hr/>
 
-        <form class="form-horizontal">
+        <div id="error-message" class="alert alert-danger">
+
+        </div>
+
+        <div class="form-horizontal">
           <div class="form-group">
             <label for="input_first_name" class="col-sm-offset-1 col-sm-3 control-label">First Name</label>
             <div class="col-sm-5">
@@ -44,10 +51,10 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
-              <button id="submit" type="submit" class="btn btn-primary pull-right">Register</button>
+              <button id="submit" class="btn btn-primary pull-right">Register</button>
             </div>
           </div>
-        </form>
+        </div>
 
       </div> <!-- panel-body -->
     </div> <!-- panel -->

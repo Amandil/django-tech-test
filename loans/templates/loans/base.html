@@ -8,8 +8,25 @@
     <link rel="stylesheet" type="text/css" href="{% static "loans/css/global.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "loans/css/base.css" %}">
     <link rel="shortcut icon" href="https://www.growthstreet.co.uk/assets/img/favicon.ico">
+    <script src='{% static "loans/js/jquery-3.2.1.js"%}'></script>
   </head>
   <body>
+
+    {% csrf_token %}
+    <script type="text/javascript">
+      var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+      function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+      });
+    </script>
 
     <header id="nav">
       <div id="nav-content">
