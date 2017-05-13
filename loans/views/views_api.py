@@ -37,7 +37,7 @@ def register(request):
                 raise IntegrityError("\"email\" must be unique")
 
             # Creating the object
-            new_user = User.objects.create(
+            new_user = User(
                 username = username,
                 first_name =  data['first_name'],
                 last_name =  data['last_name'],
@@ -54,7 +54,6 @@ def register(request):
             # Checking if phone number was parsed correctly
             # (Can only be done after the save due to field and user model constraints)
             if len(str(new_user.borrower.telephone_number)) < 1:
-                new_user.delete()
                 raise ValidationError({'message': 'Phone number is not valid: ' + data['telephone_number']})
 
         except IntegrityError as ie:
@@ -107,12 +106,22 @@ def add_business(request):
 
         data = json.loads(request.body.decode('utf-8'))
 
+        sector = ""
+        if 'Ret' in data['sector']:
+            sector = 'RT'
+        elif 'Profes' in data['sector']:
+            sector = 'PS'
+        elif 'Food' in data['sector']:
+            sector = 'FD'
+        elif 'Enter' in data['sector']:
+            sector = 'EN'
+
         try:
-            new_business = Business.objects.create(
+            new_business = Business(
                 crn = data['crn'],
                 owner = request.user,
                 name = data['business_name'],
-                sector = data['sector'],
+                sector = sector,
                 address_one = data['address_1'],
                 address_two = data['address_2'],
                 city = data['city'],
