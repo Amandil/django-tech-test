@@ -22,7 +22,7 @@
 ### Not done
 * Tests are not data-driven and have hard-coded values.
 * Did not use Django REST framework, API is simple and not resource-oriented
-
+* Does not check if email address is unique, reasonably assumed Django would handle it 
 
 ## Overview
 

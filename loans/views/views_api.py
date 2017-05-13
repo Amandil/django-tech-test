@@ -26,6 +26,12 @@ def register(request):
                 count += 1
                 username = data['first_name'] + "." + data['last_name'] + str(count)
 
+            # Ensuring that email is unique because Django
+            # couldn't handle something so basic out of the box
+            email = next(iter(User.objects.filter(email=data['email'])), None)
+            if email is not None:
+                raise IntegrityError("\"email\" must be unique")
+
             # Creating the object
             new_user = User.objects.create(
                 username = username,
@@ -49,7 +55,6 @@ def register(request):
 
         except KeyError as ke:
             return JsonResponse({'message': str(ke) + " is required"}, status=400)
-
 
         return JsonResponse({'message': 'User created'})
     else:
