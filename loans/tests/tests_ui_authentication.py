@@ -11,7 +11,7 @@ class TestRegistration(unittest.TestCase):
         self.driver = webdriver.PhantomJS()
 
     def test_journey_register(self):
-        self.driver.get(ENDPOINT + "/")
+        self.driver.get(ENDPOINT + "/admin")
 
         # We must end up on the authentication page
         self.assertEquals(TITLE_PREFIX + 'Sign In', self.driver.title);

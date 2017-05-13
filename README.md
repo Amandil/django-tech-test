@@ -19,6 +19,7 @@
 
 ### Not done
 * Tests are not data-driven and have hard-coded values.
+* Did not use Django REST framework, API is simple and not resource-oriented 
 
 ## Overview
 
