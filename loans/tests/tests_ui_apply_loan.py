@@ -70,7 +70,7 @@ class TestRegistration(LiveServerTestCase):
         self.driver.get(self.live_server_url + "/loan_application/3/" + crn)
 
         # We should end up on the loan form page
-        self.assertEquals(TITLE_PREFIX + 'Loan Application - Step 2', self.driver.title);
+        self.assertTrue(TITLE_PREFIX + 'Loan Application - Step 2', self.driver.title)
 
 
     # Shortcut for find_element_by_id
