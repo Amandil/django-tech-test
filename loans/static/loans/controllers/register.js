@@ -12,7 +12,7 @@ $(document).ready(function() {
     }));
 
     $.ajax({
-      url: "api/v1/register",
+      url: "api/v1/user/register",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
@@ -24,7 +24,7 @@ $(document).ready(function() {
       }),
       statusCode: {
         200: function(data) {
-          document.location.replace("/");
+          window.location.replace("/");
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

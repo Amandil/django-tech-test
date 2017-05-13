@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import json
 
+from loans.models import Business
+
 def register(request):
 
     if request.method == 'POST':
@@ -96,3 +98,38 @@ def log_out(request):
     logout(request)
 
     return redirect('index')
+
+def add_business(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'message': "You must be logged in to use this feature"}, status=403)
+
+    if request.method == 'POST':
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        try:
+            new_business = Business.objects.create(
+                crn = data['crn'],
+                owner = request.user,
+                name = data['business_name'],
+                sector = data['sector'],
+                address_one = data['address_1'],
+                address_two = data['address_2'],
+                city = data['city'],
+                postcode = data['postcode'],
+            )
+            new_business.full_clean()
+            new_business.save()
+
+        except IntegrityError as ie:
+            return JsonResponse({'message': str(ie)}, status=400)
+
+        except ValidationError as ve:
+            return JsonResponse({'message': str(ve)}, status=400)
+
+        except KeyError as ke:
+            return JsonResponse({'message': str(ke) + " is required"}, status=400)
+
+        return JsonResponse({'message': 'Business added'})
+    else:
+        return JsonResponse({}, status=400)

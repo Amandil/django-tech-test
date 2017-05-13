@@ -4,7 +4,7 @@ $(document).ready(function() {
   $("#submit").click(function() {
 
     $.ajax({
-      url: "api/v1/register",
+      url: "api/v1/business/add",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(JSON.stringify({
@@ -18,7 +18,7 @@ $(document).ready(function() {
       })),
       statusCode: {
         200: function(data) {
-          document.location.replace("apply/loan-application/3/" + $("#input_crn").val());
+          window.location.replace("/apply/loan-application/3/" + $("#input_crn").val());
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

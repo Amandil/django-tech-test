@@ -9,7 +9,7 @@ $(document).ready(function() {
     }));
 
     $.ajax({
-      url: "api/v1/log_in",
+      url: "api/v1/user/log_in",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
@@ -18,7 +18,7 @@ $(document).ready(function() {
       }),
       statusCode: {
         302: function(data) {
-          document.location.replace("/");
+          window.location.replace("/");
         },
         401: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

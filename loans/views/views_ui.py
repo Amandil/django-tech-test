@@ -33,7 +33,7 @@ def loan_application(request, step, crn=""):
     if step == "1":
 
         # Retrieving all of the curent user's businesses
-        
+
 
         context = {
             'title': 'Loan Application - Step 1',

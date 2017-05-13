@@ -12,6 +12,9 @@ TITLE_PREFIX = 'GrowthStreet Loans - '
 
 from .pages.sign_in import SignInPage
 from .pages.register import RegisterPage
+from .pages.add_business import AddBusinessPage
+
+from loans.models import Business
 
 class TestRegistration(LiveServerTestCase):
 
@@ -57,6 +60,18 @@ class TestRegistration(LiveServerTestCase):
 
         # We should end up on the add business page
         self.assertEquals(TITLE_PREFIX + 'Loan Application - Add Business', self.driver.title);
+
+        # Completing the form
+        crn = "09264172"
+        AddBusinessPage.complete_form(self.driver, crn, 'ACME Inc.', 'Retail', 'Building and Number', 'Street', 'London', 'W8 5EH')
+
+        # Redirecting manually due to PhantomJS
+        # Test will fail later if previous step failed
+        self.driver.get(self.live_server_url + "/loan_application/3/" + crn)
+
+        # We should end up on the loan form page
+        self.assertEquals(TITLE_PREFIX + 'Loan Application - Step 2', self.driver.title);
+
 
     # Shortcut for find_element_by_id
     def get_element(self, id):

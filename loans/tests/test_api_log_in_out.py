@@ -30,7 +30,7 @@ class TestAPILogInOut(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(200, response.status_code)
 
     '''
@@ -42,7 +42,7 @@ class TestAPILogInOut(TransactionTestCase):
             "password": "correct-horse-battery-staple"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/log_in",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/log_in",content_type="application/json", data=payload)
         self.assertEqual(302, response.status_code)
 
     '''
@@ -54,9 +54,9 @@ class TestAPILogInOut(TransactionTestCase):
             "password": "correct-horse-battery-staple"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/log_in",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/log_in",content_type="application/json", data=payload)
         self.assertEqual(302, response.status_code)
 
         payload = "{}"
-        response = self.client.post(API_ENDPOINT + "/log_out",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/log_out",content_type="application/json", data=payload)
         self.assertEqual(302, response.status_code)

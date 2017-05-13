@@ -35,7 +35,7 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
 
         # Response must be OK
         self.assertEqual(200, response.status_code)
@@ -54,7 +54,7 @@ class TestAPIRegistration(TransactionTestCase):
     '''
     def test_http_method(self):
 
-        response = self.client.get(API_ENDPOINT + "/register")
+        response = self.client.get(API_ENDPOINT + "/user/add")
         self.assertEqual(400, response.status_code)
 
         with self.assertRaises(ObjectDoesNotExist):
@@ -74,7 +74,7 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         # Making sure that worked
         self.assertEqual(200, response.status_code)
 
@@ -87,7 +87,7 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 123 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(400, response.status_code)
         self.assertTrue("email" in response.json()["message"])
 
@@ -101,7 +101,7 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(200, response.status_code)
 
         # Creating user without a phone number
@@ -111,7 +111,7 @@ class TestAPIRegistration(TransactionTestCase):
             "email": "jane.doe@acme.com",
             "password": "correct-horse-battery-staple"
         }"""
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(400, response.status_code)
         self.assertTrue("telephone" in response.json()["message"])
 
@@ -128,7 +128,7 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(400, response.status_code)
 
         # Invalid phone number
@@ -140,5 +140,5 @@ class TestAPIRegistration(TransactionTestCase):
             "telephone_number": "+44 7765 222 4567 123 123 14 123 123"
         }"""
 
-        response = self.client.post(API_ENDPOINT + "/register",content_type="application/json", data=payload)
+        response = self.client.post(API_ENDPOINT + "/user/add",content_type="application/json", data=payload)
         self.assertEqual(400, response.status_code)
