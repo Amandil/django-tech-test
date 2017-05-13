@@ -43,9 +43,15 @@ def register(request):
             new_user.borrower.telephone_number = data['telephone_number']
             new_user.borrower.is_borrower = True
 
-            # Valiadtion and save
+            # Validation and save
             new_user.full_clean()
             new_user.save()
+
+            # Checking if phone number was parsed correctly
+            # (Can only be done after the save due to field and user model constraints)
+            if len(str(new_user.borrower.telephone_number)) < 1:
+                new_user.delete()
+                raise ValidationError({'message': 'Phone number is not valid: ' + data['telephone_number']})
 
         except IntegrityError as ie:
             return JsonResponse({'message': str(ie)}, status=400)

@@ -68,7 +68,7 @@ class TestAPIRegistration(TransactionTestCase):
             new_user = User.objects.get(email='john.smith@acme.com')
 
     '''
-    Users must be unique
+    Users must have a unique email
     '''
     def test_integrity(self):
 
