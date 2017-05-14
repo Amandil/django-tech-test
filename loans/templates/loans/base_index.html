@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <a id="apply-loan" class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' 1%}">
+          <span class="glyphicon glyphicon-plus" style="margin-right: 5px; "></span>
+          Apply for a loan
+        </a>
+        <h1> Your Loan Applications </h1>
+        <hr/>
+
+        <ul id="loan-list" class="list-group">
+          {% if loans %}
+            {% for loan in loans %}
+              <a href="#" class="list-group-item" style="font-size: 16pt">
+                <strong>£{{loan.amount}}</strong> <small>for {{loan.target_business.name}} until {{loan.loan_deadline}}</small>
+                {# <span class="badge" style="font-size: 10pt">{{loan.left}} days left</span>#}
+              </a>
+            {% endfor %}
+          {% else %}
+            <center><p style="font-size: 16pt; margin-top: 50px">You don't seem to have any loan applications</p></center>
+          {% endif %}
+        </ul>
+
+      </div> <!-- panel-body -->
+    </div> <!-- panel -->
+  </div> <!-- col-md-12 -->
+
+</div> <!-- row -->
+
+{% endblock %}

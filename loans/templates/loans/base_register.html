@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<script src='{% static "loans/controllers/register.js" %}'></script>
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <h1> Create an account </h1>
+        <hr/>
+
+        <div id="error-message" class="alert alert-danger">
+
+        </div>
+
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label for="input_first_name" class="col-sm-offset-1 col-sm-3 control-label">First Name</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="input_first_name" placeholder="First Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input_last_name" class="col-sm-offset-1 col-sm-3 control-label">Last Name</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="input_last_name" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input_email" class="col-sm-offset-1 col-sm-3 control-label">Email</label>
+            <div class="col-sm-5">
+              <input type="email" class="form-control" id="input_email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input_password" class="col-sm-offset-1 col-sm-3 control-label">Password</label>
+            <div class="col-sm-5">
+              <input type="password" class="form-control" id="input_password" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input_phone_number" class="col-sm-offset-1 col-sm-3 control-label">Phone Number</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="input_phone_number" placeholder="Phone number">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-6">
+              <button id="submit" class="btn btn-primary pull-right">Register</button>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- panel-body -->
+    </div> <!-- panel -->
+  </div> <!-- col-md-12 -->
+
+</div> <!-- row -->
+
+{% endblock %}

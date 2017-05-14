@@ -1,0 +1,22 @@
+html {
+  padding: 0px; }
+
+.btn {
+  border-radius: 45px;
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.btn-primary, a.btn-primary:visited {
+  background-color: #66c5c8;
+  color: #FFF !important;
+  border: 0px;
+  font-weight: bold !important; }
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #46a5a8;
+  color: #FFF; }
+
+#error-message {
+  display: none; }
+
+/*# sourceMappingURL=global.css.map */

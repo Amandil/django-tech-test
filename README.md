@@ -1,6 +1,36 @@
+## Development
+
+
+### Assumptions made on given requirements
+* The only unique aspect about a business will be its CRN
+* Have not added a minimum length validation on Loan reason. Assumption is that loan request will not be accepted without a proper reason.
+* No minimum loan duration specified. Assumed one month.
+* No maximum loan duration specified. Assumed 2 years.
+* We are not recording the date when a loan was requested
+
+### Design choices
+* All 8 character CRNs are supported (English + Welsh + Scottish)
+* A business only has one owner
+* An owner can have several businesses
+* International phone numbers are accepted although default field format is 'GB'
+* Used money field to store loan amount with default currency set to GBP. No functional reason here, just seemed like a cleaner solution.
+* Money field is validated against decimals due to a bug in 'moneyd' package. Default currency is GBP so it still validates correctly.
+* Postcode is UK-only and validated using regex. Could validate against a postcode database but its not ideal for businesses set up in newly-erected buildings (might result in loss of customers if a valid postcode is not accepted).
+* Added an 'is_borrower' flag to users to separate those that registered for loans from those that might have registered for other applications
+* Email is more memorable than username, username will be automatically generated so that user will not be inconvenienced
+
+### Not done (Due to time constraints)
+* Tests are not data-driven and have hard-coded values.
+* Did not use Django REST framework, API is simple and not resource-oriented
+* Does not check if email address is unique, reasonably assumed Django would handle it
+* Loan application form doesn't have a calendar input (last time I've tried to use one it took ages)
+* Application might not work if not placed on index
+* Test coverage isn't 100% - breaking it might be difficult but some illegal operations might work
+* Does not check if user is a borrower before authenticating (users from other apps without phone number could apply)
+
 ## Overview
 
-Growth Street is building a platform to allow growing businesses to borrow money at affordable rates. Our ability to make the entire process efficient on our web platform will be critical in offering the lowest rates to our customers. 
+Growth Street is building a platform to allow growing businesses to borrow money at affordable rates. Our ability to make the entire process efficient on our web platform will be critical in offering the lowest rates to our customers.
 
 #### The Task
 

@@ -1,0 +1,36 @@
+
+$back-dark: #24292d;
+$back-light: #dadada;
+$accent: #66c5c8;
+$accent-dark: #46a5a8;
+$accent-secondary: #607276;
+$foreground-light: #FFF;
+$nav-back: #14191d;
+$foreground-dark: #283034;
+
+html {
+  padding: 0px;
+}
+
+.btn {
+  border-radius: 45px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.btn-primary, a.btn-primary:visited {
+  background-color: $accent;
+  color: $foreground-light !important;
+  border: 0px;
+  font-weight: bold !important;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+
+    background-color: $accent-dark;
+    color: $foreground-light;
+}
+
+#error-message {
+  display: none;
+}
