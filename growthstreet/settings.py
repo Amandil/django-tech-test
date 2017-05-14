@@ -57,7 +57,7 @@ ROOT_URLCONF = 'growthstreet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ 'loans/templates/loans' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

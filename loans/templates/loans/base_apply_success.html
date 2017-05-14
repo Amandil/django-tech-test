@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <h1> 3 - Success</h1>
+        <hr/>
+
+        <center><p style="font-size: 24pt; margin-top: 50px">Congratulations!<br/> Your application has been sent.</p></center>
+
+        <hr/>
+        <a id="return" href="{% url 'dashboard'%}" class="btn btn-primary pull-right">Finish</a>
+
+      </div> <!-- panel-body -->
+    </div> <!-- panel -->
+  </div> <!-- col-md-12 -->
+
+</div> <!-- row -->
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <a id="add-business" class="btn btn-primary pull-right" style="margin-top: 18px" href="{% url 'loan_application' '2' %}">
+          <span class="glyphicon glyphicon-plus" style="margin-right: 5px; "></span>
+          Add a business
+        </a>
+        <h1> 1 - Select your business</h1>
+        <hr/>
+
+        <ul id="business-list" class="list-group">
+          {% if businesses %}
+            {% for business in businesses %}
+              <a id="{{business.crn}}" href="{% url 'loan_application_crn' 3 business.crn %}" class="list-group-item" style="font-size: 16pt">
+                <strong>{{ business.name }}</strong> <small>({{ business.crn }})</small>
+              </a>
+            {% endfor %}
+          {% else %}
+            <center><p style="font-size: 16pt; margin-top: 50px">You don't seem to have any businesses</p></center>
+          {% endif %}
+        </ul>
+
+      </div> <!-- panel-body -->
+    </div> <!-- panel -->
+  </div> <!-- col-md-12 -->
+
+</div> <!-- row -->
+
+{% endblock %}

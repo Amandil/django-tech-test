@@ -61,3 +61,7 @@ target/
 
 # Database
 db.sqlite3
+
+# Sass
+*.map
+*.sass-cache*

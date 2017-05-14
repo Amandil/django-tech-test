@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GrowthStreet Loans - {{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "loans/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "loans/css/global.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "loans/css/base.css" %}">
+    <link rel="shortcut icon" href="https://www.growthstreet.co.uk/assets/img/favicon.ico">
+    <script src='{% static "loans/js/jquery-3.2.1.js"%}'></script>
+    <script src='{% static "loans/js/bootstrap.js"%}'></script>
+  </head>
+  <body>
+
+    {% csrf_token %}
+    <script type="text/javascript">
+      var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+      function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+      });
+    </script>
+
+    <header id="nav">
+      <div id="nav-content">
+        {# <button class="btn btn-primary pull-right">Log Out</button>#}
+        <img id="logo" src="{% static "loans/img/gs-logo.png"%}" />
+      </div>
+    </header>
+
+    <div id="content-area">
+      <div id="content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+  </body>
+</html>
