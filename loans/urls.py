@@ -11,8 +11,8 @@ urlpatterns = [
     # Main dashboard
     url(r'^dashboard$', views.views_ui.dashboard, name='dashboard'),
     # Loan application
-    url(r'^apply/loan-application/([1-4]{1})/', views.views_ui.loan_application, name='loan_application'),
-    url(r'^apply/loan-application/([1-4]{1})/([a-z,A-Z,0-9]{8})$', views.views_ui.loan_application, name='loan_application_crn'),
+    url(r'^apply/loan-application/([1,2,4]{1})/', views.views_ui.loan_application, name='loan_application'),
+    url(r'^apply/loan-application/([3]{1})/([a-z,A-Z,0-9]{8})$', views.views_ui.loan_application, name='loan_application_crn'),
     # "API"
     url(r'^api/v1/user/add$', views.views_api.register),
     url(r'^api/v1/user/log_in$', views.views_api.log_in),

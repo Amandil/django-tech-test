@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -19,7 +20,7 @@
           {% if loans %}
             {% for loan in loans %}
               <a href="#" class="list-group-item" style="font-size: 16pt">
-                <strong>£{{loan.amount}}</strong> <small>for {{loan.business_name}} until {{loan.deadline}}</small>
+                <strong>£{{loan.amount}}</strong> <small>for {{loan.target_business.name}} until {{loan.loan_deadline}}</small>
                 <span class="badge" style="font-size: 10pt">{{loan.left}} days left</span>
               </a>
             {% endfor %}

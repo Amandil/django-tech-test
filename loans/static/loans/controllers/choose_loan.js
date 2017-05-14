@@ -3,22 +3,21 @@ $(document).ready(function() {
 
   $("#submit").click(function() {
 
+    amount = $(".ws-number", $("#input_amount_area")).val().replace(',','');
+
     $.ajax({
-      url: "/api/v1/business/add",
+      url: "/api/v1/loan/add",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify({
         'crn': $("#input_crn").val(),
-        'business_name': $('#input_name').val(),
-        'sector': $('#input_sector').val(),
-        'address_1': $('#input_address_1').val(),
-        'address_2': $('#input_address_2').val(),
-        'city': $('#input_city').val(),
-        'postcode': $('#input_postcode').val(),
+        'amount': amount,
+        'deadline': $('#input_deadline').val(),
+        'reason': $('#input_reason').val(),
       }),
       statusCode: {
         200: function(data) {
-          window.location.replace("/apply/loan-application/3/" + $("#input_crn").val());
+          window.location.replace("/apply/loan-application/4/");
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

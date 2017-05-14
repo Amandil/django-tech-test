@@ -13,6 +13,7 @@ TITLE_PREFIX = 'GrowthStreet Loans - '
 from .pages.sign_in import SignInPage
 from .pages.register import RegisterPage
 from .pages.add_business import AddBusinessPage
+from .pages.apply_loan import ApplyLoanPage
 
 from loans.models import Business
 
@@ -65,11 +66,21 @@ class TestRegistration(LiveServerTestCase):
         crn = "09264172"
         AddBusinessPage.complete_form(self.driver, crn, 'ACME Inc.', 'Retail', 'Building and Number', 'Street', 'London', 'W8 5EH')
 
-        # self.driver.get(self.live_server_url + "/loan_application/3/" + crn)
-
         # We should end up on the loan form page
         self.assertTrue(TITLE_PREFIX + 'Loan Application - Step 2', self.driver.title)
 
+        self.driver.get(self.live_server_url + "/apply/loan-application/3/" + crn)
+
+        ApplyLoanPage.complete_form(self.driver, "20000", "2018-12-02", "Sample reason here")
+
+        # We should end up on the success page
+        self.assertTrue(TITLE_PREFIX + 'Loan Application - Success', self.driver.title)
+
+        # Return button should take us to homepage
+        self.get_element("return").click()
+        self.assertEquals(TITLE_PREFIX + 'Homepage', self.driver.title);
+
+        # Homepage should now have our loans
 
     # Shortcut for find_element_by_id
     def get_element(self, id):

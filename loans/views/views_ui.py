@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
 
+from loans.models import Loan, Business
+
 def index(request):
     if not request.user.is_authenticated:
         context = {
@@ -21,14 +23,27 @@ def registration(request):
     return render(request, 'loans/base_register.html', context)
 
 def dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    # Finding all of the current user's businesses
+    businesses = Business.objects.filter(owner=request.user)
+
+    loans = []
+
+    for business in businesses:
+        loans_business = Loan.objects.filter(target_business=business)
+        loans += loans_business
+
     context = {
         'title': 'Homepage',
-        'loans': [
-        ]
+        'loans': loans
     }
     return render(request, 'loans/base_index.html', context)
 
 def loan_application(request, step, crn=""):
+    if not request.user.is_authenticated:
+        return redirect('/')
 
     if step == "1":
 
@@ -51,7 +66,8 @@ def loan_application(request, step, crn=""):
 
     elif step == "3":
         context = {
-            'title': 'Loan Application - Step 2'
+            'title': 'Loan Application - Step 2',
+            'crn': crn
         }
         return render(request, 'loans/base_apply_choose_loan.html', context)
 

@@ -23,6 +23,8 @@
 * Tests are not data-driven and have hard-coded values.
 * Did not use Django REST framework, API is simple and not resource-oriented
 * Does not check if email address is unique, reasonably assumed Django would handle it
+* Loan application form doesn't have a calendar input (last time I've tried to use one it took ages)
+* Application might not work if not placed on index
 
 ## Overview
 
