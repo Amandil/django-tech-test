@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import json
 
-from loans.models import Business, Borrower
+from loans.models import Business, Borrower, Loan
 
 def register(request):
 
@@ -81,12 +81,12 @@ def log_in(request):
     try:
         email = data['email']
         # Looking up username based on email
-        user = next(iter(User.objects.filter(email=email)), None)
+        username = next(iter(User.objects.filter(email=email)), 'not found')
         password = data['password']
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user.username)
+            login(request, username)
             return redirect('dashboard')
         else:
             return JsonResponse({'message': "Invalid username or password " + username}, status=401)
@@ -134,6 +134,44 @@ def add_business(request):
             )
             new_business.full_clean()
             new_business.save()
+
+        except IntegrityError as ie:
+            return JsonResponse({'message': str(ie)}, status=400)
+
+        except ValidationError as ve:
+            return JsonResponse({'message': str(ve)}, status=400)
+
+        except KeyError as ke:
+            return JsonResponse({'message': str(ke) + " is required"}, status=400)
+
+        return JsonResponse({'message': 'Business added'})
+    else:
+        return JsonResponse({}, status=400)
+
+def add_loan(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'message': "You must be logged in to use this feature"}, status=403)
+
+    if request.method == 'POST':
+
+        data = json.loads(request.body.decode('utf-8'))
+
+        try:
+            # Finding the business based on CRN
+            business = next(iter(Business.objects.filter(crn=data['crn'])), None)
+
+            if business is None:
+                raise ValidationError("CRN is not valid")
+
+            new_loan = Loan(
+                target_business = business,
+                amount = data['amount'],
+                loan_deadline = data['deadline'],
+                reason = data['reason']
+            )
+
+            new_loan.full_clean()
+            new_loan.save()
 
         except IntegrityError as ie:
             return JsonResponse({'message': str(ie)}, status=400)

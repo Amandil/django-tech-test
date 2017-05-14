@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^api/v1/user/add$', views.views_api.register),
     url(r'^api/v1/user/log_in$', views.views_api.log_in),
     url(r'^api/v1/user/log_out$', views.views_api.log_out),
-    url(r'^api/v1/business/add$', views.views_api.add_business)
+    url(r'^api/v1/business/add$', views.views_api.add_business),
+    url(r'^api/v1/loan/add$', views.views_api.add_loan)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
