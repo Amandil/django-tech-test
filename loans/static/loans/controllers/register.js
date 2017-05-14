@@ -3,14 +3,6 @@ $(document).ready(function() {
 
   $("#submit").click(function() {
 
-    console.log(JSON.stringify({
-      'first_name': $("#input_first_name").val(),
-      'last_name': $('#input_last_name').val(),
-      'email': $('#input_email').val(),
-      'password': $('#input_password').val(),
-      'telephone_number': $('#input_phone_number').val()
-    }));
-
     $.ajax({
       url: "/api/v1/user/add",
       type: "POST",

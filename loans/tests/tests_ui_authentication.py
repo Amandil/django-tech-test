@@ -29,7 +29,7 @@ class TestRegistration(LiveServerTestCase):
     def test_journey_register(self):
 
         self.driver.get(self.live_server_url + "/")
-        
+
         # We must end up on the authentication page
         self.assertEquals(TITLE_PREFIX + 'Sign In', self.driver.title);
 
@@ -59,12 +59,18 @@ class TestRegistration(LiveServerTestCase):
         error_message = self.get_element('error-message').text
         self.assertEquals('', error_message)
 
-        # PhantomJS fails to follow redirects
-        # Manually redirecting
-        # self.driver.get(self.live_server_url + "/")
+        # try:
+            # element = WebDriverWait(self.driver, 4).until(
+                # EC.presence_of_element_located((By.ID, "apply-loan"))
+            # )
+        # finally:
+
+        # PhantomJS fails to follow some redirects
+        # Manually redirecting, next assertion will fail if logged in failed
+        self.driver.get(self.live_server_url + "/dashboard")
 
         # User should be redirected to the homepage/dashboard once logged in
-        # self.assertEquals(TITLE_PREFIX + 'Homepage', self.driver.title);
+        self.assertEquals(TITLE_PREFIX + 'Homepage', self.driver.title);
 
     '''
     Users must not be able to access anything other than the sign in page unless

@@ -1,5 +1,4 @@
 {% load static %}
-{% csrf_token %}
 
 <!DOCTYPE html>
 <html>
@@ -10,25 +9,25 @@
     <link rel="stylesheet" type="text/css" href="{% static "loans/css/auth.css" %}">
     <link rel="shortcut icon" href="https://www.growthstreet.co.uk/assets/img/favicon.ico">
     <script src='{% static "loans/js/jquery-3.2.1.js"%}'></script>
-    <script src='{% static "loans/controllers/auth.js"%}'></script>
   </head>
   <body>
 
-      {% csrf_token %}
-      <script type="text/javascript">
-        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    {% csrf_token %}
+    <script type="text/javascript">
+      var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+      function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
         }
-        $.ajaxSetup({
-          beforeSend: function(xhr, settings) {
-              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-          }
-        });
-      </script>
+      });
+    </script>
+    <script src='{% static "loans/controllers/auth.js"%}'></script>
 
     <div id="container" >
       <div class="row">

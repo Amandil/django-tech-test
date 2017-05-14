@@ -18,8 +18,7 @@ $(document).ready(function() {
       }),
       statusCode: {
         200: function(data) {
-          console.log(data)
-          // window.location.replace("/apply/loan-application/3/" + $("#input_crn").val());
+          window.location.replace("/apply/loan-application/3/" + $("#input_crn").val());
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);

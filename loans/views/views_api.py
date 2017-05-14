@@ -58,6 +58,7 @@ def register(request):
             # Checking if phone number was parsed correctly
             # (Can only be done after the save due to field and user model constraints)
             if len(str(new_user.borrower.telephone_number)) < 1:
+                new_user.delete()
                 raise ValidationError({'message': 'Phone number is not valid: ' + data['telephone_number']})
 
         except IntegrityError as ie:
@@ -80,12 +81,12 @@ def log_in(request):
     try:
         email = data['email']
         # Looking up username based on email
-        username = next(iter(User.objects.filter(email=email)), None).username
+        user = next(iter(User.objects.filter(email=email)), None)
         password = data['password']
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)
+            login(request, user.username)
             return redirect('dashboard')
         else:
             return JsonResponse({'message': "Invalid username or password " + username}, status=401)

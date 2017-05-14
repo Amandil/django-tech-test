@@ -65,9 +65,7 @@ class TestRegistration(LiveServerTestCase):
         crn = "09264172"
         AddBusinessPage.complete_form(self.driver, crn, 'ACME Inc.', 'Retail', 'Building and Number', 'Street', 'London', 'W8 5EH')
 
-        # Redirecting manually due to PhantomJS
-        # Test will fail later if previous step failed
-        self.driver.get(self.live_server_url + "/loan_application/3/" + crn)
+        # self.driver.get(self.live_server_url + "/loan_application/3/" + crn)
 
         # We should end up on the loan form page
         self.assertTrue(TITLE_PREFIX + 'Loan Application - Step 2', self.driver.title)
