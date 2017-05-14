@@ -1,5 +1,9 @@
-## Development
+## Note
 
+* For API tests to work, run the server and export LOANS_URL="http://localhost:8080" (No / at the end!). It uses the Django requests module but it still needs a live server to test against.
+* Two selenium tests will fail due to bugs with PhantomJS webdriver (occasionally has issues with redirects and sending authentication). Manual reproduction in a browser works.
+
+## Development
 
 ### Assumptions made on given requirements
 * The only unique aspect about a business will be its CRN
