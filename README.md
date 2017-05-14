@@ -25,6 +25,8 @@
 * Does not check if email address is unique, reasonably assumed Django would handle it
 * Loan application form doesn't have a calendar input (last time I've tried to use one it took ages)
 * Application might not work if not placed on index
+* Test coverage isn't 100% - breaking it might be difficult but some illegal operations might work
+* Does not check if user is a borrower before authenticating (users from other apps without phone number could apply)
 
 ## Overview
 

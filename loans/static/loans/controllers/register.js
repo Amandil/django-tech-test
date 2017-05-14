@@ -20,7 +20,7 @@ $(document).ready(function() {
         },
         400: function(data) {
           $("#error-message").html("ERROR: " + data.responseText);
-          $("#error-message").css("display", "");
+          $("#error-message").css("display", "block");
         }
       }
     }); // $.ajax

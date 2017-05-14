@@ -59,12 +59,6 @@ class TestRegistration(LiveServerTestCase):
         error_message = self.get_element('error-message').text
         self.assertEquals('', error_message)
 
-        # try:
-            # element = WebDriverWait(self.driver, 4).until(
-                # EC.presence_of_element_located((By.ID, "apply-loan"))
-            # )
-        # finally:
-
         # PhantomJS fails to follow some redirects
         # Manually redirecting, next assertion will fail if logged in failed
         self.driver.get(self.live_server_url + "/dashboard")

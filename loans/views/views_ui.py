@@ -48,13 +48,11 @@ def loan_application(request, step, crn=""):
     if step == "1":
 
         # Retrieving all of the curent user's businesses
-
+        businesses = Business.objects.filter(owner=request.user)
 
         context = {
             'title': 'Loan Application - Step 1',
-            'businesses': [
-
-            ]
+            'businesses': businesses
         }
         return render(request, 'loans/base_apply_select_business.html', context)
 
@@ -76,3 +74,5 @@ def loan_application(request, step, crn=""):
             'title': 'Loan Application - Success'
         }
         return render(request, 'loans/base_apply_success.html', context)
+    # else:
+        # Never gonna happen (404)

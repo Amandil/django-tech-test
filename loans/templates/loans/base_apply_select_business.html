@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -18,19 +19,14 @@
         <ul id="business-list" class="list-group">
           {% if businesses %}
             {% for business in businesses %}
-              <a href="#" class="list-group-item" style="font-size: 16pt">
-                <strong>£{{loan.amount}}</strong> <small>for {{loan.business_name}} until {{loan.deadline}}</small>
-                <span class="badge" style="font-size: 10pt">{{loan.left}} days left</span>
+              <a id="{{business.crn}}" href="{% url 'loan_application_crn' 3 business.crn %}" class="list-group-item" style="font-size: 16pt">
+                <strong>{{ business.name }}</strong> <small>({{ business.crn }})</small>
               </a>
             {% endfor %}
           {% else %}
             <center><p style="font-size: 16pt; margin-top: 50px">You don't seem to have any businesses</p></center>
           {% endif %}
         </ul>
-
-
-        {# <hr/>#}
-        {# <a href="{% url 'loan_application_crn' '3' '11131112' %}" class="btn btn-primary pull-right">Next ></a>#}
 
       </div> <!-- panel-body -->
     </div> <!-- panel -->
